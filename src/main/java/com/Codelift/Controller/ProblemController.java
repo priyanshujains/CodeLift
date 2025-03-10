@@ -1,14 +1,20 @@
 package com.Codelift.Controller;
 
+import com.Codelift.Dtos.ProblemDto;
+import com.Codelift.Service.ProblemService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/problem")
 public class ProblemController {
+
+    private ProblemService problemService;
+
+    public ProblemController(ProblemService problemService){
+        this.problemService=problemService;
+    }
 
     @GetMapping
     public ResponseEntity<?> getAllProblems(){
@@ -17,8 +23,9 @@ public class ProblemController {
 
 
     @PostMapping
-    public ResponseEntity<?> addProblem(){
-        return null;
+    public ResponseEntity<?> addProblem(@RequestBody ProblemDto problemDto){
+
+        return new ResponseEntity<>(problemService.addProblem(problemDto), HttpStatus.ACCEPTED);
     }
 
 }
