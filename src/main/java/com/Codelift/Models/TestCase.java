@@ -1,8 +1,12 @@
 package com.Codelift.Models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class TestCase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

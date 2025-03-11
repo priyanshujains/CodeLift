@@ -16,16 +16,34 @@ public class ProblemController {
         this.problemService=problemService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<?> getAllProblems(){
-        return null;
+        return new ResponseEntity<>(problemService.getAllProblems(),HttpStatus.OK);
     }
 
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<?> addProblem(@RequestBody ProblemDto problemDto){
 
         return new ResponseEntity<>(problemService.addProblem(problemDto), HttpStatus.ACCEPTED);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSingleProblems(@PathVariable Long id){
+        return new ResponseEntity<>(problemService.getSingleProblem(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/instructor/{insId}")
+    public ResponseEntity<?> getInstructorProblem(@PathVariable long insId){
+        return new ResponseEntity<>(problemService.getInstructorsProblem(insId),HttpStatus.OK);
+    }
+
+    //check that oonly he can delete his ques
+    @DeleteMapping("/{id}")
+    public void Delete(@PathVariable Long id){
+        problemService.deleteById(id);
+
     }
 
 }
