@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.*;
 
 @RestController
-@RequestMapping("/compile")
+@RequestMapping("/problem/compile")
 public class CodeExecutionController {
 
 
@@ -23,6 +23,7 @@ public class CodeExecutionController {
     public String executeCode(@RequestBody CodeRequest request) {
         String language =request.getLanguage();
         String code = request.getCode();
+        System.out.println(code);
 
         try {
             String containerId = getDockerImage(language);
